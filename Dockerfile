@@ -4,20 +4,20 @@ USER root
 
 LABEL description="Go 1.13 available as docker container is a base platform for building and running various Go 1.13 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
       io.k8s.description="Go 1.13 available as docker container is a base platform for building and running various Go 1.13 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
-	  io.k8s.display-name="Go 1.13" \
-	  maintainer="Koo Kin Wai <glug71@gmail.com>" \
-	  name="kwkoo/go-toolset-7-centos7" \
-	  summary="Platform for building and running Go 1.13 based applications" \
-	  usage="docker run kwkoo/go-toolset-7-centos7"
+      io.k8s.display-name="Go 1.13" \
+      maintainer="Koo Kin Wai <glug71@gmail.com>" \
+      name="kwkoo/go-toolset-7-centos7" \
+      summary="Platform for building and running Go 1.13 based applications" \
+      usage="docker run kwkoo/go-toolset-7-centos7"
 
 RUN set -x \
   && \
   yum remove -y \
     go-toolset-7-1.10.2-4.el7.x86_64 \
-	go-toolset-7-golang-src-1.10.2-4.el7.noarch \
-	go-toolset-7-golang-1.10.2-4.el7.x86_64 \
-	go-toolset-7-runtime-1.10.2-4.el7.x86_64 \
-	go-toolset-7-golang-bin-1.10.2-4.el7.x86_64 \
+    go-toolset-7-golang-src-1.10.2-4.el7.noarch \
+    go-toolset-7-golang-1.10.2-4.el7.x86_64 \
+    go-toolset-7-runtime-1.10.2-4.el7.x86_64 \
+    go-toolset-7-golang-bin-1.10.2-4.el7.x86_64 \
   && \
   cd /tmp \
   && \
