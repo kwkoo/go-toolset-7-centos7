@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker build -t kwkoo/go-toolset-7-centos7:1.13 .
