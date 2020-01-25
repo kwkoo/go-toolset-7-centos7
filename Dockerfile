@@ -12,6 +12,10 @@ LABEL description="Go 1.13 available as docker container is a base platform for 
 
 RUN set -x \
   && \
+  rm -f /opt/app-root/etc/scl_enable \
+  && \
+  touch /opt/app-root/etc/scl_enable \
+  && \
   yum remove -y \
     go-toolset-7-1.10.2-4.el7.x86_64 \
     go-toolset-7-golang-src-1.10.2-4.el7.noarch \
