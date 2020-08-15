@@ -2,13 +2,13 @@ FROM docker.io/centos/go-toolset-7-centos7:latest@sha256:f515aea549980c0d2595fc9
 
 USER root
 
-LABEL description="Go 1.13 available as docker container is a base platform for building and running various Go 1.13 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
-      io.k8s.description="Go 1.13 available as docker container is a base platform for building and running various Go 1.13 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
-      io.k8s.display-name="Go 1.13" \
-      maintainer="Koo Kin Wai <glug71@gmail.com>" \
+LABEL description="Go 1.15 available as docker container is a base platform for building and running various Go 1.15 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
+      io.k8s.description="Go 1.15 available as docker container is a base platform for building and running various Go 1.15 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
+      io.k8s.display-name="Go 1.15" \
+      maintainer="Koo Kin Wai <kin.wai.koo@gmail.com>" \
       name="kwkoo/go-toolset-7-centos7" \
-      summary="Platform for building and running Go 1.13 based applications" \
-      usage="docker run kwkoo/go-toolset-7-centos7"
+      summary="Platform for building and running Go 1.15 based applications" \
+      usage="docker run kwkoo/go-toolset-7-centos7:1.15"
 
 RUN set -x \
   && \
@@ -25,13 +25,13 @@ RUN set -x \
   && \
   cd /tmp \
   && \
-  wget --quiet https://dl.google.com/go/go1.13.6.linux-amd64.tar.gz \
+  wget --quiet https://golang.org/dl/go1.15.linux-amd64.tar.gz \
   && \
   cd /usr/local \
   && \
-  tar -zxf /tmp/go1.13.6.linux-amd64.tar.gz \
+  tar -zxf /tmp/go1.15.linux-amd64.tar.gz \
   && \
-  rm -f /tmp/go1.13.6.linux-amd64.tar.gz \
+  rm -f /tmp/go1.15.linux-amd64.tar.gz \
   && \
   ln -s /usr/local/go/bin/go /usr/bin/go
 
