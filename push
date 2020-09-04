@@ -1,6 +1,8 @@
 #!/bin/bash
 
-VERSION=1.15
+VERSION=1.15.1
 
-docker tag kwkoo/go-toolset-7-centos7:${VERSION} docker.io/kwkoo/go-toolset-7-centos7:${VERSION}
-docker push docker.io/kwkoo/go-toolset-7-centos7:${VERSION}
+docker tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
+docker tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:latest
+docker push ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
+docker push ghcr.io/kwkoo/go-toolset-7-centos7:latest

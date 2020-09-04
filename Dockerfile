@@ -1,38 +1,42 @@
-FROM docker.io/centos/go-toolset-7-centos7:latest@sha256:f515aea549980c0d2595fc9b7a9cc2e5822be952889a200f2bb9954619ceafe3
+FROM centos/s2i-base-centos7
 
-USER root
+ENV NAME=golang \
+    STI_SCRIPTS_PATH=/usr/libexec/s2i \
+    VERSION=1.15.1
 
-LABEL description="Go 1.15 available as docker container is a base platform for building and running various Go 1.15 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
-      io.k8s.description="Go 1.15 available as docker container is a base platform for building and running various Go 1.15 applications and frameworks. Go is an easy to learn, powerful, statically typed language in the C/C++ tradition with garbage collection, concurrent programming support, and memory safety features." \
-      io.k8s.display-name="Go 1.15" \
+ENV SUMMARY="Platform for building and running Go $VERSION based applications" \
+    DESCRIPTION="Go $VERSION available as docker container is a base platform for \
+building and running various Go $VERSION applications and frameworks. \
+Go is an easy to learn, powerful, statically typed language in the C/C++ \
+tradition with garbage collection, concurrent programming support, and memory safety features."
+
+LABEL summary="$SUMMARY" \
+      description="$DESCRIPTION" \
+      io.k8s.description="$DESCRIPTION" \
+      io.k8s.display-name="Go $VERSION" \
+      io.openshift.tags="builder,golang,golang1151,rh-golang151,go" \
+      com.redhat.component="go-toolset-7" \
+      name="centos/go-toolset-7-centos7" \
+      version="1" \
       maintainer="Koo Kin Wai <kin.wai.koo@gmail.com>" \
-      name="kwkoo/go-toolset-7-centos7" \
-      summary="Platform for building and running Go 1.15 based applications" \
-      usage="docker run kwkoo/go-toolset-7-centos7:1.15"
+      usage="docker run centos/go-toolset-7-centos7"
 
-RUN set -x \
-  && \
-  rm -f /opt/app-root/etc/scl_enable \
-  && \
-  touch /opt/app-root/etc/scl_enable \
-  && \
-  yum remove -y \
-    go-toolset-7-1.10.2-4.el7.x86_64 \
-    go-toolset-7-golang-src-1.10.2-4.el7.noarch \
-    go-toolset-7-golang-1.10.2-4.el7.x86_64 \
-    go-toolset-7-runtime-1.10.2-4.el7.x86_64 \
-    go-toolset-7-golang-bin-1.10.2-4.el7.x86_64 \
-  && \
-  cd /tmp \
-  && \
-  wget --quiet https://golang.org/dl/go1.15.linux-amd64.tar.gz \
-  && \
-  cd /usr/local \
-  && \
-  tar -zxf /tmp/go1.15.linux-amd64.tar.gz \
-  && \
-  rm -f /tmp/go1.15.linux-amd64.tar.gz \
-  && \
-  ln -s /usr/local/go/bin/go /usr/bin/go
+RUN yum install -y centos-release-scl-rh && \
+    yum-config-manager --enable centos-sclo-rh-testing && \
+    yum clean all -y && \
+    cd /tmp && \
+    curl -L -o go.tar.gz https://golang.org/dl/go${VERSION}.linux-amd64.tar.gz && \
+    cd /usr/local && \
+    tar -zxf /tmp/go.tar.gz && \
+    rm -f /tmp/go.tar.gz && \
+    ln -s /usr/local/go/bin/go /usr/bin/go
+
+# Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH.
+COPY ./s2i/bin/ $STI_SCRIPTS_PATH
+
+RUN chown -R 1001:0 $STI_SCRIPTS_PATH && chown -R 1001:0 $APP_ROOT
 
 USER 1001
+
+# Set the default CMD to print the usage of the language image.
+CMD $STI_SCRIPTS_PATH/usage
