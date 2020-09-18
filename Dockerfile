@@ -2,7 +2,7 @@ FROM centos/s2i-base-centos7
 
 ENV NAME=golang \
     STI_SCRIPTS_PATH=/usr/libexec/s2i \
-    VERSION=1.15.1
+    VERSION=1.15.2
 
 ENV SUMMARY="Platform for building and running Go $VERSION based applications" \
     DESCRIPTION="Go $VERSION available as docker container is a base platform for \
@@ -19,6 +19,7 @@ LABEL summary="$SUMMARY" \
       name="centos/go-toolset-7-centos7" \
       version="1" \
       maintainer="Koo Kin Wai <kin.wai.koo@gmail.com>" \
+      org.opencontainers.image.source="https://github.com/kwkoo/go-toolset-7-centos7" \
       usage="docker run centos/go-toolset-7-centos7"
 
 RUN yum install -y centos-release-scl-rh && \

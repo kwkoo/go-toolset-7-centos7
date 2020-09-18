@@ -2,7 +2,7 @@
 
 NAME=golang
 STI_SCRIPTS_PATH=/usr/libexec/s2i
-VERSION=1.15.1
+VERSION=1.15.2
 SUMMARY="Platform for building and running Go $VERSION based applications"
 DESCRIPTION="Go $VERSION available as docker container is a base platform for \
 building and running various Go $VERSION applications and frameworks. \
@@ -28,6 +28,7 @@ buildah config \
   --label version="1" \
   --label maintainer="Koo Kin Wai <kin.wai.koo@gmail.com>" \
   --label usage="docker run centos/go-toolset-7-centos7" \
+  --label org.opencontainers.image.source="https://github.com/kwkoo/go-toolset-7-centos7" \
   $ctr
 
 buildah run $ctr -- yum install -y centos-release-scl-rh yum-utils
@@ -53,3 +54,7 @@ buildah config \
 
 buildah commit $ctr kwkoo/go-toolset-7-centos7:${VERSION}
 
+buildah tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
+buildah tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:latest
+buildah push ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
+ghcr.io/kwkoo/go-toolset-7-centos7:latest
