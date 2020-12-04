@@ -2,7 +2,7 @@
 
 NAME=golang
 STI_SCRIPTS_PATH=/usr/libexec/s2i
-VERSION=1.15.2
+VERSION=1.15.6
 SUMMARY="Platform for building and running Go $VERSION based applications"
 DESCRIPTION="Go $VERSION available as docker container is a base platform for \
 building and running various Go $VERSION applications and frameworks. \
@@ -22,7 +22,7 @@ buildah config \
   --label description="$DESCRIPTION" \
   --label io.k8s.description="$DESCRIPTION" \
   --label io.k8s.display-name="Go $VERSION" \
-  --label io.openshift.tags="builder,golang,golang1151,rh-golang151,go" \
+  --label io.openshift.tags="builder,golang,golang1156,rh-golang1156,go" \
   --label com.redhat.component="go-toolset-7" \
   --label name="centos/go-toolset-7-centos7" \
   --label version="1" \
