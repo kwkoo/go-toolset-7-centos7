@@ -52,7 +52,7 @@ buildah config \
   --cmd $STI_SCRIPTS_PATH/usage \
   $ctr
 
-buildah commit $ctr kwkoo/go-toolset-7-centos7:${VERSION}
+buildah commit --format docker $ctr kwkoo/go-toolset-7-centos7:${VERSION}
 
 buildah tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
 buildah tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:latest
