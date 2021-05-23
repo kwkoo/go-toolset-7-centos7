@@ -2,7 +2,7 @@ FROM centos/s2i-base-centos7
 
 ENV NAME=golang \
     STI_SCRIPTS_PATH=/usr/libexec/s2i \
-    VERSION=1.15.6
+    VERSION=1.16.4
 
 ENV SUMMARY="Platform for building and running Go $VERSION based applications" \
     DESCRIPTION="Go $VERSION available as docker container is a base platform for \
@@ -14,7 +14,7 @@ LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Go $VERSION" \
-      io.openshift.tags="builder,golang,golang1156,rh-golang1156,go" \
+      io.openshift.tags="builder,golang,golang1164,rh-golang1164,go" \
       com.redhat.component="go-toolset-7" \
       name="centos/go-toolset-7-centos7" \
       version="1" \

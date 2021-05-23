@@ -1,8 +1,14 @@
 #!/bin/bash
 
+cd `dirname $0`
+BASE=`pwd`
+cd - >> /dev/null
+
+# Extract version from Dockerfile
+VERSION="$(grep VERSION= ${BASE}/Dockerfile | sed 's/.*VERSION=\([^\\ ]*\).*/\1/')"
+
 NAME=golang
 STI_SCRIPTS_PATH=/usr/libexec/s2i
-VERSION=1.15.6
 SUMMARY="Platform for building and running Go $VERSION based applications"
 DESCRIPTION="Go $VERSION available as docker container is a base platform for \
 building and running various Go $VERSION applications and frameworks. \
@@ -52,9 +58,8 @@ buildah config \
   --cmd $STI_SCRIPTS_PATH/usage \
   $ctr
 
-buildah commit --format docker $ctr kwkoo/go-toolset-7-centos7:${VERSION}
+buildah commit --format docker $ctr ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
 
-buildah tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
-buildah tag kwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:latest
+buildah tag ghcr.iokwkoo/go-toolset-7-centos7:${VERSION} ghcr.io/kwkoo/go-toolset-7-centos7:latest
 buildah push ghcr.io/kwkoo/go-toolset-7-centos7:${VERSION}
-ghcr.io/kwkoo/go-toolset-7-centos7:latest
+buildah push ghcr.io/kwkoo/go-toolset-7-centos7:latest
